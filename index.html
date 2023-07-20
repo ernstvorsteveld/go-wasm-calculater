@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("./main.wasm"), go.importObject).then((result) => {
+            go.run(result.instance);
+        });
+        function sum1() {
+            ret = goSum1(
+                parseInt(document.getElementById("first").value),
+                parseInt(document.getElementById("second").value)
+            );
+            console.log(ret);
+            document.getElementById("sum1").innerHTML = ret.message;
+        }
+
+        function sum2() {
+            ret = goSum2()
+            console.log(ret);
+            document.getElementById("sum2").innerHTML = ret.message;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="sum1">&nbsp;</div>
+    <div id="sum2">&nbsp;</div>
+    <div>
+        <input type="number" id="first">
+        <input type="number" id="second">
+    </div>
+    <button onClick="sum1()">sum1</button>
+    <button onClick="sum2()">sum2</button>
+</body>

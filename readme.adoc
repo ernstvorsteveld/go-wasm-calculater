@@ -1,0 +1,11 @@
+= Go Web Assembly
+
+[source,bash]
+----
+GOOS=js GOARCH=wasm go build -o main.wasm main.go
+
+npx http-server .
+
+ tinygo build -o wasm.wasm -target wasm ./main.go
+
+ ----
